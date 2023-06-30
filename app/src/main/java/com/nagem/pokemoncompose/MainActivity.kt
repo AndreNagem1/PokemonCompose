@@ -21,7 +21,6 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             PokemonComposeTheme {
-                // A surface container using the 'background' color from the theme
                 Surface(
                     modifier = Modifier.fillMaxSize(), color = MaterialTheme.colors.background
                 ) {
@@ -76,7 +75,7 @@ fun MyTopBar(name: String) {
         backgroundColor = MaterialTheme.colors.background, elevation = 4.dp
     ) {
         Row(modifier = Modifier.padding(12.dp)) {
-            Text(text = name)
+            Text(text = "Pokemon List")
             Spacer(modifier = Modifier.weight(1F))
             Icon(imageVector = Icons.Filled.List, contentDescription = "")
         }

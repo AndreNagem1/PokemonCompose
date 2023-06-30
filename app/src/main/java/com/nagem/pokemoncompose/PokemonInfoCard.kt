@@ -24,7 +24,7 @@ fun PokemonInfoCard(
         modifier = Modifier
             .fillMaxWidth()
             .height(200.dp)
-            .padding(16.dp)
+            .padding(20.dp)
             .background(color = MaterialTheme.colors.onSurface),
         onClick = onClick
     ) {
