@@ -2,7 +2,7 @@ package com.nagem.pokemoncompose
 
 import com.nagem.pokemoncompose.model.PokemonInfo
 
-val listPokemonsMock = listOf(
+val listPokemonImage = listOf(
     R.drawable.pikachu,
     R.drawable.raichu,
     R.drawable.squirtle,

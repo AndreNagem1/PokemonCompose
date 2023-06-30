@@ -43,11 +43,12 @@ fun PokemonListScreen(name: String) {
         MyTopBar(name)
     }) {
         LazyColumn(modifier = Modifier.padding(it)) {
-            items(listPokemonsMock.size) { index ->
-                PokemonCard(listPokemonsMock[index])
+            items(listPokemonImage.size) { index ->
+                PokemonCard(listPokemonImage[index])
                 {
                     showPokemonInfo = true
                     pokemonInfo = listPokemonInfoMock[index]
+                    pokemonInfo.pokemonImage = listPokemonImage[index]
                 }
             }
         }
@@ -61,6 +62,7 @@ fun PokemonListScreen(name: String) {
                         height = pokemonInfo.height.toString(),
                         weight = pokemonInfo.weight.toString(),
                         ability = pokemonInfo.abilities,
+                        pokemonImage = pokemonInfo.pokemonImage
                     ) { showPokemonInfo = false }
                 }
             }
