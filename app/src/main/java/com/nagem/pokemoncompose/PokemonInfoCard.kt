@@ -14,6 +14,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.graphics.painter.BrushPainter
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 
@@ -34,13 +35,14 @@ fun PokemonInfoCard(
             .height(310.dp)
             .padding(20.dp)
             .border(border = BorderStroke(width = 10.dp, color = MaterialTheme.colors.onError))
-            .background(color = MaterialTheme.colors.onSurface),
-        onClick = onClick
+            .background(color = MaterialTheme.colors.onSurface)
+            .testTag("Pokemon Info Card"),
+        onClick = onClick,
     ) {
         Column {
             Image(
                 painter = painterResource(pokemonImage),
-                contentDescription = "Pokemon Image",
+                contentDescription = "Pokemon Image Info",
                 modifier = Modifier
                     .background(MaterialTheme.colors.onSurface)
                     .fillMaxWidth()

@@ -44,7 +44,9 @@ fun PokemonListScreen(name: String) {
     }) {
         LazyColumn(modifier = Modifier.padding(it)) {
             items(listPokemonImage.size) { index ->
-                PokemonCard(listPokemonImage[index])
+                PokemonCard(
+                    pokemonImage = listPokemonImage[index]
+                )
                 {
                     showPokemonInfo = true
                     pokemonInfo = listPokemonInfoMock[index]

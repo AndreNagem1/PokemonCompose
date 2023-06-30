@@ -20,10 +20,6 @@ fun PokemonCard(pokemonImage: Int, onClick: () -> Unit) {
     Card(modifier = Modifier.padding(16.dp), onClick = onClick) {
         Column {
             Box(modifier = Modifier.fillMaxWidth()) {
-                Row(modifier = Modifier.fillMaxWidth()) {
-                    Spacer(modifier = Modifier.weight(1F))
-                    Text(text = "Pikcachu")
-                }
                 Image(
                     painter = painterResource(pokemonImage),
                     contentDescription = "Pokemon Image",
