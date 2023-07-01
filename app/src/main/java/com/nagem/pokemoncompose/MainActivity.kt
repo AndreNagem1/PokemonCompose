@@ -11,6 +11,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.List
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.nagem.pokemoncompose.ui.theme.PokemonCard
@@ -42,7 +43,11 @@ fun PokemonListScreen(name: String) {
     Scaffold(topBar = {
         MyTopBar(name)
     }) {
-        LazyColumn(modifier = Modifier.padding(it)) {
+        LazyColumn(
+            modifier = Modifier
+                .padding(it)
+                .testTag("Pokemon LazyList"),
+        ) {
             items(listPokemonImage.size) { index ->
                 PokemonCard(
                     pokemonImage = listPokemonImage[index]

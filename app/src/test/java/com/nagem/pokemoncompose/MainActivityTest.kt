@@ -4,88 +4,134 @@ import androidx.compose.ui.test.*
 import androidx.compose.ui.test.junit4.createComposeRule
 import com.nagem.pokemoncompose.ui.theme.PokemonComposeTheme
 import kotlinx.coroutines.*
-import kotlinx.coroutines.test.StandardTestDispatcher
-import kotlinx.coroutines.test.setMain
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
-import org.junit.rules.TestRule
 import org.junit.runner.RunWith
 import org.robolectric.RobolectricTestRunner
 
 @RunWith(RobolectricTestRunner::class)
 class MainActivityTest {
 
+    /*
+    Considerations :
+
+    LazyColumn will only show as much as 4 item, that will be how much a screen will render, therefore the maximum children will be 4
+    Considering only 4 items will appear in the most, and that they can change as the screen is scrolled, the index of them will change
+    according to which items are on screen, this makes the test very flaky if correct screen size is not considered
+     */
+
     @get:Rule
     val composeTestRule = createComposeRule()
-    private val dispatcher = StandardTestDispatcher()
 
-
-    @Test
-    fun `When pokemonImageCard is pressed should show PokemonInfoCard`() {
+    @Before
+    fun setUp() {
         composeTestRule.setContent {
             PokemonComposeTheme {
                 PokemonListScreen(name = "My pokemon List")
             }
         }
+    }
 
+    @Test
+    fun `When pokemonImageCard is pressed should show PokemonInfoCard`() {
         composeTestRule.onAllNodesWithContentDescription("Pokemon Image")[0].performClick()
         composeTestRule.onNodeWithContentDescription("Pokemon Image Info").assertIsDisplayed()
     }
 
     @Test
     fun `When pokemonImageCard element 0 is pressed should show PokemonInfoCard of Pikachu`() {
-        composeTestRule.setContent {
-            PokemonComposeTheme {
-                PokemonListScreen(name = "My pokemon List")
-            }
-        }
-
-        composeTestRule.onAllNodesWithContentDescription("Pokemon Image")[0].performClick()
+        composeTestRule.onNodeWithTag("Pokemon LazyList")
+            .onChildren()[0]
+            .performClick()
         composeTestRule.onNodeWithText("Pikachu").assertIsDisplayed()
     }
 
     @Test
-    fun `When pokemonImageCard element 2 is pressed should show PokemonInfoCard of Raichu`() {
-        composeTestRule.setContent {
-            PokemonComposeTheme {
-                PokemonListScreen(name = "My pokemon List")
-            }
-        }
-
-        composeTestRule.onAllNodesWithContentDescription("Pokemon Image")[1].performClick()
+    fun `When pokemonImageCard element 1 is pressed should show PokemonInfoCard of Raichu`() {
+        composeTestRule.onNodeWithTag("Pokemon LazyList")
+            .onChildren()[1]
+            .performClick()
         composeTestRule.onNodeWithText("Raichu").assertIsDisplayed()
     }
 
 
     @Test
     fun `When pokemonImageCard element 2 is pressed should show PokemonInfoCard of Squirtle`() {
-        runBlocking {
-            launch {
-                composeTestRule.setContent {
-                    PokemonComposeTheme {
-                        PokemonListScreen(name = "My pokemon List")
-                    }
-                }
+        composeTestRule.onNodeWithTag("Pokemon LazyList")
+            .performScrollToIndex(2)
 
-                composeTestRule.onAllNodesWithContentDescription("Pokemon Image")[2].performClick()
-                composeTestRule.awaitIdle()
-                composeTestRule.onNodeWithText("Squirtle").assertIsDisplayed()
-            }
-        }
+        composeTestRule.onNodeWithTag("Pokemon LazyList")
+            .onChildren()[2]
+            .performClick()
+
+        composeTestRule.onNodeWithText("Squirtle").assertIsDisplayed()
+    }
+
+    @Test
+    fun `When pokemonImageCard element 3 is pressed should show PokemonInfoCard of Charizard`() {
+        composeTestRule.onNodeWithTag("Pokemon LazyList")
+            .performScrollToIndex(3)
+
+        composeTestRule.onNodeWithTag("Pokemon LazyList")
+            .onChildren()[2]
+            .performClick()
+
+        composeTestRule.onNodeWithText("Charizard").assertIsDisplayed()
+    }
+
+    @Test
+    fun `When pokemonImageCard element 4 is pressed should show PokemonInfoCard of Eevee`() {
+        composeTestRule.onNodeWithTag("Pokemon LazyList")
+            .performScrollToIndex(4)
+
+        composeTestRule.onNodeWithTag("Pokemon LazyList")
+            .onChildren()[2]
+            .performClick()
+
+        composeTestRule.onNodeWithText("Eevee").assertIsDisplayed()
     }
 
 
     @Test
-    fun `When pokemonImageInfo is pressed should hide PokemonInfoCard`() {
-        composeTestRule.setContent {
-            PokemonComposeTheme {
-                PokemonListScreen(name = "My pokemon List")
-            }
-        }
+    fun `When pokemonImageCard element 5 is pressed should show PokemonInfoCard of Umbreon`() {
+        composeTestRule.onNodeWithTag("Pokemon LazyList")
+            .performScrollToIndex(5)
 
+        composeTestRule.onNodeWithTag("Pokemon LazyList")
+            .onChildren()[2]
+            .performClick()
+
+        composeTestRule.onNodeWithText("Umbreon").assertIsDisplayed()
+    }
+
+    @Test
+    fun `When pokemonImageCard Last element is pressed should show PokemonInfoCard of Vaporean`() {
+        composeTestRule.onNodeWithTag("Pokemon LazyList")
+            .performScrollToIndex(6)
+
+        composeTestRule.onNodeWithTag("Pokemon LazyList")
+            .onChildren()[3]
+            .performClick()
+
+        composeTestRule.onNodeWithText("Vaporean").assertIsDisplayed()
+    }
+
+    @Test
+    fun `Assert pokemonImageList contains `() {
+        composeTestRule.onNodeWithTag("Pokemon LazyList")
+            .performScrollToIndex(6)
+
+        //The Number for is because LazColumn will only render what is on the screen, 4 is the most it can appear
+        composeTestRule.onNodeWithTag("Pokemon LazyList")
+            .onChildren()
+            .assertCountEquals(4)
+    }
+
+    @Test
+    fun `When pokemonImageInfo is pressed should hide PokemonInfoCard`() {
         composeTestRule.onAllNodesWithContentDescription("Pokemon Image")[0].performClick()
         composeTestRule.onNode(hasTestTag("Pokemon Info Card")).performClick()
-        composeTestRule.onNodeWithContentDescription("Pokemon Image Info").assertDoesNotExist()
+        composeTestRule.onNode(hasText("Pokemon Image Info")).assertDoesNotExist()
     }
 }

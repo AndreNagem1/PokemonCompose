@@ -37,6 +37,7 @@ fun PokemonInfoCard(
             .border(border = BorderStroke(width = 10.dp, color = MaterialTheme.colors.onError))
             .background(color = MaterialTheme.colors.onSurface)
             .testTag("Pokemon Info Card"),
+
         onClick = onClick,
     ) {
         Column {
