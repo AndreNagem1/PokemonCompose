@@ -6,6 +6,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.List
+import androidx.compose.material.icons.filled.Search
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
@@ -25,7 +26,12 @@ fun PokemonListScreen(navigateToSearch: () -> Unit) {
     Scaffold(
         topBar = { MyTopBar() },
         floatingActionButton = {
-            FloatingActionButton(onClick = { navigateToSearch() }) {
+            FloatingActionButton(
+                modifier = Modifier
+                    .padding(16.dp),
+                backgroundColor = MaterialTheme.colors.primary,
+                onClick = { navigateToSearch() }) {
+                Icon(imageVector = Icons.Filled.Search, contentDescription = "Search Fab")
             }
         }
     ) {

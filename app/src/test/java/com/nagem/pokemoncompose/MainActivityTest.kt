@@ -11,7 +11,7 @@ import org.junit.runner.RunWith
 import org.robolectric.RobolectricTestRunner
 
 @RunWith(RobolectricTestRunner::class)
-class PokemonListScreenTest {
+class MainActivityTest {
 
     /*
     Considerations :
@@ -28,7 +28,7 @@ class PokemonListScreenTest {
     fun setUp() {
         composeTestRule.setContent {
             PokemonComposeTheme {
-                PokemonListScreen(name = "My pokemon List")
+                PokemonListScreen {}
             }
         }
     }
