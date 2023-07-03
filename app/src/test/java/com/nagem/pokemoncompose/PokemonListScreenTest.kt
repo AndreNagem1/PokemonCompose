@@ -1,17 +1,20 @@
 package com.nagem.pokemoncompose
 
 import androidx.compose.ui.test.*
+import androidx.compose.ui.test.junit4.createAndroidComposeRule
 import androidx.compose.ui.test.junit4.createComposeRule
 import com.nagem.pokemoncompose.ui.theme.PokemonComposeTheme
+import com.nagem.pokemoncompose.PokemonListScreen
 import kotlinx.coroutines.*
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
+import org.koin.core.context.stopKoin
 import org.robolectric.RobolectricTestRunner
 
 @RunWith(RobolectricTestRunner::class)
-class MainActivityTest {
+class PokemonListScreenTest {
 
     /*
     Considerations :
@@ -26,6 +29,7 @@ class MainActivityTest {
 
     @Before
     fun setUp() {
+        stopKoin()
         composeTestRule.setContent {
             PokemonComposeTheme {
                 PokemonListScreen {}
