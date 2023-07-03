@@ -67,6 +67,6 @@ fun InfoRow(propertyName: String, property: String) {
     Row {
         Spacer(modifier = Modifier.width(10.dp))
         Text(text = propertyName)
-        Text(text = property)
+        Text(text = property, maxLines = 1)
     }
 }

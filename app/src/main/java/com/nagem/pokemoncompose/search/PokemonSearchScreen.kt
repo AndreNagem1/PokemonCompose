@@ -13,9 +13,10 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.nagem.pokemoncompose.search.PokemonSearchUiState
-import com.nagem.pokemoncompose.ui.theme.PokemonCardName
+import com.nagem.pokemoncompose.ui.theme.PokemonCardSearch
 import com.nagem.pokemoncompose.ui.theme.PokemonComposeTheme
 import com.nagem.pokemoncompose.util.GifImage
+import com.nagem.pokemoncompose.util.MyFloatingActionButton
 
 @Composable
 fun PokemonSearchScreen(
@@ -28,11 +29,13 @@ fun PokemonSearchScreen(
     Scaffold(
         topBar = { MyTopBar() },
         floatingActionButton = {
-            FloatingActionButton(
-                modifier = Modifier
-                    .padding(16.dp),
-                backgroundColor = MaterialTheme.colors.primary,
-                onClick = { searchPokemon(uiState.pokemonSearch) }) {}
+            MyFloatingActionButton {
+                if (uiState.pokemonSearch.isEmpty()) {
+                    Toast.makeText(context, "Nome vazio", Toast.LENGTH_SHORT).show()
+                    return@MyFloatingActionButton
+                }
+                searchPokemon(uiState.pokemonSearch)
+            }
         }
     ) { paddingValues ->
 
@@ -41,11 +44,13 @@ fun PokemonSearchScreen(
         }
 
         if (uiState.isLoading) {
-            Box(modifier = Modifier.fillMaxSize()) {
+            Box(
+                modifier = Modifier
+                    .fillMaxSize()
+            ) {
                 GifImage(
                     modifier = Modifier
-                        .width(80.dp)
-                        .height(80.dp),
+                        .fillMaxSize()
                 )
             }
         } else {
@@ -82,7 +87,7 @@ fun PokemonSearchScreen(
                             .padding(16.dp)
                     ) {
                         uiState.pokemonResult?.let { pokemonResponse ->
-                            PokemonCardName(pokemonResponse = pokemonResponse) {}
+                            PokemonCardSearch(pokemonResponse = pokemonResponse) {}
                         }
                     }
                 }
