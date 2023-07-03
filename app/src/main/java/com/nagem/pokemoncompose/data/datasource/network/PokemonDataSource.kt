@@ -1,13 +1,13 @@
 package com.nagem.pokemoncompose.data.datasource.network
 
-import com.nagem.pokemoncompose.model.PokemonResult
+import com.nagem.pokemoncompose.model.PokemonResponse
 import retrofit2.http.GET
-import retrofit2.http.Query
+import retrofit2.http.Url
 
 interface PokemonDataSource {
 
-    @GET("api/v2/pokemon/")
+    @GET
     suspend fun searchPokemon(
-        @Query("name") name: String
-    ): PokemonResult
+        @Url url: String
+    ): PokemonResponse
 }

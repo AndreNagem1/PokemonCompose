@@ -42,7 +42,8 @@ fun PokemonNavGraph(
 
             PokemonSearchScreen(
                 uiState = state.value,
-                searchPokemon = viewModel::searchPokemon
+                searchPokemon = viewModel::searchPokemon,
+                setPokemonSearch = viewModel::setPokemonSearch
             )
         }
     }
