@@ -46,11 +46,13 @@ fun PokemonSearchScreen(
         if (uiState.isLoading) {
             Box(
                 modifier = Modifier
-                    .fillMaxSize()
+                    .fillMaxSize(),
+                contentAlignment = Alignment.Center
             ) {
                 GifImage(
                     modifier = Modifier
-                        .fillMaxSize()
+                        .height(80.dp)
+                        .width(80.dp)
                 )
             }
         } else {
