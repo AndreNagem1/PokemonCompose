@@ -1,5 +1,4 @@
 #!/usr/bin/env sh
-chmod +x gradlew
 
 #
 # Copyright 2015 the original author or authors.
