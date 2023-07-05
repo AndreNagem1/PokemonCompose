@@ -7,24 +7,19 @@ on:
   pull_request:
     branches:
       - master
-    
   workflow_dispatch:
-  
-  
+
 jobs:
   build:
-    
     runs_on: ubuntu-latest
-    
+
     steps:
-      - uses: actions/checkout@v2 
-     
+      - uses: actions/checkout@v2
+
       - name: Run a one-line script
         run: echo Hello, World!
-        
-      - name : Run a multi-line script
-          run:
-            echo Add other actions to build,
-            echo test, and deploy your project.
-      
-      
+
+      - name: Run a multi-line script
+        run: |
+          echo Add other actions to build,
+          echo test, and deploy your project.
