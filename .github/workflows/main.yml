@@ -11,7 +11,7 @@ on:
 
 jobs:
   build:
-    runs_on: ${{ fromJSON('["ubuntu-latest", "self-hosted"]')[github.repository == 'github/docs-internal'] }}
+    runs-on: ubuntu-latest
 
     steps:
       - uses: actions/checkout@v2
