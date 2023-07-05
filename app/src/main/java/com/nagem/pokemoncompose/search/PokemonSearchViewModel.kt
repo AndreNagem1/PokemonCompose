@@ -42,6 +42,17 @@ class PokemonSearchViewModel(private val pokemonRepository: PokemonRepository) :
             it.copy(isLoading = true)
         }
 
+        if (name.isEmpty()) {
+            _uiState.update {
+                it.copy(
+                    isLoading = false,
+                    pokemonResult = null,
+                    error = "Nome do pokemon vazio"
+                )
+            }
+            return
+        }
+
         viewModelScope.launch {
             val response = pokemonRepository.searchPokemon(name)
             when (response) {

@@ -29,13 +29,7 @@ fun PokemonSearchScreen(
     Scaffold(
         topBar = { MyTopBar() },
         floatingActionButton = {
-            MyFloatingActionButton {
-                if (uiState.pokemonSearch.isEmpty()) {
-                    Toast.makeText(context, "Nome vazio", Toast.LENGTH_SHORT).show()
-                    return@MyFloatingActionButton
-                }
-                searchPokemon(uiState.pokemonSearch)
-            }
+            MyFloatingActionButton { searchPokemon(uiState.pokemonSearch) }
         }
     ) { paddingValues ->
 
