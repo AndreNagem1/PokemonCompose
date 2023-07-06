@@ -25,7 +25,7 @@ jobs:
           name: index.html
           path: app/build/reports/lint-results-debug.html
 
-  Unit tests:
+  Unit_tests:
     needs: [lint]
     runs-on: ubuntu-latest
     steps:
