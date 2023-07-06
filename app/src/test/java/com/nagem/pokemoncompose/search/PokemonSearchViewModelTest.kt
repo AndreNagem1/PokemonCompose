@@ -3,14 +3,11 @@ package com.nagem.pokemoncompose.search
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.nagem.pokemoncompose.data.AsyncResult
 import com.nagem.pokemoncompose.data.PokemonRepository
-import com.nagem.pokemoncompose.model.PokemonResponse
 import io.mockk.coEvery
 import io.mockk.mockk
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.StandardTestDispatcher
 import kotlinx.coroutines.test.setMain
-import org.junit.Assert.*
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -33,16 +30,13 @@ class PokemonSearchViewModelTest {
         Dispatchers.setMain(dispatcher)
     }
 
-    @OptIn(ExperimentalCoroutinesApi::class)
     @Test
     fun `when pokemonName is empty should return an error`() {
         viewModel.searchPokemon("")
-        dispatcher.scheduler.advanceUntilIdle()
         assert(viewModel.uiState.value.error.contains("Nome do pokemon vazio"))
     }
 
 
-    @OptIn(ExperimentalCoroutinesApi::class)
     @Test
     fun `when pokemonName is valid should return an Success with pokemon returns`() {
         viewModel.searchPokemon("pikachu")
