@@ -40,3 +40,19 @@ jobs:
         with:
           name: unit_test_report
           path: app/build/reports/tests/testDebugUnitTest/
+
+  integrated_tests:
+    needs: [ Unit_tests ]
+    runs-on: macos-latest
+    steps:
+      - name: Checkout the code
+        uses: actions/checkout@v3
+
+      - name: Run robolectric tests
+        run: ./gradlew connectedCheck
+
+      - name: Upload test report
+        uses: actions/upload-artifact@v2
+        with:
+          name: instrumentation_test_report
+          path: app/build/reports/androidTests/connected/
