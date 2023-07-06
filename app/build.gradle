@@ -89,5 +89,5 @@ dependencies {
     implementation "io.coil-kt:coil-gif:2.1.0"
 
 
-    testImplementation "io.mockk:mockk:1.0.0"
+    testImplementation "io.mockk:mockk:1.12.1"
 }
