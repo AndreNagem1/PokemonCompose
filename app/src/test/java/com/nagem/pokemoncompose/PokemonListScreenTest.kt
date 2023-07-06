@@ -1,10 +1,8 @@
 package com.nagem.pokemoncompose
 
 import androidx.compose.ui.test.*
-import androidx.compose.ui.test.junit4.createAndroidComposeRule
 import androidx.compose.ui.test.junit4.createComposeRule
 import com.nagem.pokemoncompose.ui.theme.PokemonComposeTheme
-import com.nagem.pokemoncompose.PokemonListScreen
 import kotlinx.coroutines.*
 import org.junit.Before
 import org.junit.Rule
